@@ -12,7 +12,7 @@ contract Wallet {
         bool sent;
     }
     Transfer[] public transfers;
-    mapping(address => mapping(uint256 => bool)) public approvals;
+    mapping(address => mapping(uint256 => bool)) public approvalsMap;
 
     constructor(address[] memory _approvers, uint256 _quorum) public {
         approvers = _approvers;
@@ -37,11 +37,11 @@ contract Wallet {
     function approveTransfer(uint256 id) external onlyApprover {
         require(transfers[id].sent == false, "transfer has already been sent");
         require(
-            approvals[msg.sender][id] == false,
+            approvalsMap[msg.sender][id] == false,
             "approver has already approved this transfer"
         );
 
-        approvals[msg.sender][id] == true;
+        approvalsMap[msg.sender][id] = true;
         transfers[id].approvals++;
 
         if (transfers[id].approvals >= quorum) {
@@ -56,7 +56,7 @@ contract Wallet {
 
     modifier onlyApprover() {
         bool allowed = false;
-        for (uint256 i = 0; i < approvers.length; i++) {
+        for (uint256 i; i < approvers.length; i++) {
             if (approvers[i] == msg.sender) {
                 allowed = true;
             }

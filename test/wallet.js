@@ -98,7 +98,7 @@ contract('Wallet', (accounts) => {
     );
   });
 
-  it.only('should not approve transfer twice', async () => {
+  it('should not approve transfer twice', async () => {
     await wallet.createTransfer(100, accounts[5], { from: accounts[0] });
     await wallet.approveTransfer(0, { from: accounts[0] });
 
