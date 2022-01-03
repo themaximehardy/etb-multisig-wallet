@@ -11,7 +11,7 @@ const NewTransfer = ({ createTransfer }) => {
     });
   };
 
-  const submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     createTransfer(transfer);
   };
@@ -19,7 +19,7 @@ const NewTransfer = ({ createTransfer }) => {
   return (
     <div>
       <h2>Create transfer:</h2>
-      <form onSubmit={(e) => submit()}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor='amount'>Amount</label>
         <input
           id='amount'
