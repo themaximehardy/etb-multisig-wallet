@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getWeb3, getWallet } from './utils.js';
 import Header from './Header.js';
-import NewTransfer from './NewTransfer';
+import NewTransfer from './NewTransfer.js';
+import TransfersList from './TransfersList.js';
 
 function App() {
   // web3
@@ -12,6 +13,7 @@ function App() {
   // smart contract
   const [approvers, setApprovers] = useState([]);
   const [quorum, setQuorum] = useState(undefined);
+  const [transfers, setTransfers] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -21,6 +23,7 @@ function App() {
 
       const approvers = await wallet.methods.getApprovers().call();
       const quorum = await wallet.methods.quorum().call();
+      const transfers = await wallet.methods.getTransfers().call();
 
       setWeb3(web3);
       setAccounts(accounts);
@@ -28,6 +31,7 @@ function App() {
 
       setApprovers(approvers);
       setQuorum(quorum);
+      setTransfers(transfers);
     };
     init();
   }, []);
@@ -51,6 +55,7 @@ function App() {
       Multisig Dapp
       <Header approvers={approvers} quorum={quorum} />
       <NewTransfer createTransfer={createTransfer} />
+      <TransfersList transfers={transfers} />
     </div>
   );
 }
