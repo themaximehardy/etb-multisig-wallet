@@ -1,4 +1,4 @@
-const TransfersList = ({ transfers }) => {
+const TransfersList = ({ transfers, approveTransfer }) => {
   return (
     <div>
       <h2>Transfers</h2>
@@ -19,7 +19,10 @@ const TransfersList = ({ transfers }) => {
                 <td>{id}</td>
                 <td>{amount}</td>
                 <td>{to}</td>
-                <td>{approvals}</td>
+                <td>
+                  {approvals}{' '}
+                  <button onClick={() => approveTransfer(id)}></button>
+                </td>
                 <td>{sent ? 'yes' : 'no'}</td>
               </tr>
             );

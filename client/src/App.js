@@ -40,6 +40,10 @@ function App() {
     await wallet.methods.createTransfer(amount, to).send({ from: accounts[0] });
   };
 
+  const approveTransfer = (transferId) => {
+    wallet.methods.approveTransfer(transferId).send({ from: accounts[0] });
+  };
+
   if (
     typeof web3 === undefined ||
     typeof accounts === undefined ||
@@ -55,7 +59,7 @@ function App() {
       Multisig Dapp
       <Header approvers={approvers} quorum={quorum} />
       <NewTransfer createTransfer={createTransfer} />
-      <TransfersList transfers={transfers} />
+      <TransfersList transfers={transfers} approveTransfer={approveTransfer} />
     </div>
   );
 }
