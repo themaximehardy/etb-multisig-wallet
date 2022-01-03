@@ -1,6 +1,4 @@
-import React from 'react';
-
-export default function Header({ approvers, quorum }) {
+const Header = ({ approvers, quorum }) => {
   return (
     <header>
       <ul>
@@ -9,4 +7,6 @@ export default function Header({ approvers, quorum }) {
       </ul>
     </header>
   );
-}
+};
+
+export default Header;

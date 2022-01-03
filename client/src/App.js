@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getWeb3, getWallet } from './utils.js';
 import Header from './Header.js';
+import NewTransfer from './NewTransfer';
 
 function App() {
   // web3
@@ -31,6 +32,10 @@ function App() {
     init();
   }, []);
 
+  const createTransfer = async ({ amount, to }) => {
+    await wallet.methods.createTransfer(amount, to).send({ from: accounts[0] });
+  };
+
   if (
     typeof web3 === undefined ||
     typeof accounts === undefined ||
@@ -45,6 +50,7 @@ function App() {
     <div>
       Multisig Dapp
       <Header approvers={approvers} quorum={quorum} />
+      <NewTransfer createTransfer={createTransfer} />
     </div>
   );
 }
