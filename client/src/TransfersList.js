@@ -21,7 +21,7 @@ const TransfersList = ({ transfers, approveTransfer }) => {
                 <td>{to}</td>
                 <td>
                   {approvals}{' '}
-                  <button onClick={() => approveTransfer(id)}></button>
+                  <button onClick={() => approveTransfer(id)}>Approve</button>
                 </td>
                 <td>{sent ? 'yes' : 'no'}</td>
               </tr>
